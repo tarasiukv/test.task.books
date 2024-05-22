@@ -24,11 +24,6 @@ class Publisher
     private $name;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $address;
-
-    /**
      * @ORM\OneToMany(targetEntity="Book", mappedBy="publisher")
      */
     private $books;
@@ -36,6 +31,25 @@ class Publisher
     public function __construct()
     {
         $this->books = new ArrayCollection();
+    }
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    public function getBooks()
+    {
+        return $this->books;
     }
 
 }
