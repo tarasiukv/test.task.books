@@ -24,11 +24,6 @@ class Author
     private $name;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $biography;
-
-    /**
      * @ORM\OneToMany(targetEntity="Book", mappedBy="author")
      */
     private $books;
@@ -38,4 +33,23 @@ class Author
         $this->books = new ArrayCollection();
     }
 
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    public function getBooks()
+    {
+        return $this->books;
+    }
 }
