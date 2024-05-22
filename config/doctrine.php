@@ -33,12 +33,12 @@ return [
                 base_path('app/Entities')
             ],
 
-            'repository'    => Doctrine\ORM\EntityRepository::class,
+            'repositories' => env('DOCTRINE_REPOSITORIES', 'App\Repositories'),
 
             'proxies'       => [
                 'namespace'     => 'DoctrineProxies',
                 'path'          => storage_path('proxies'),
-                'auto_generate' => env('DOCTRINE_PROXY_AUTOGENERATE', false)
+                'auto_generate' => env('DOCTRINE_PROXY_AUTOGENERATE', true)
             ],
 
             /*
