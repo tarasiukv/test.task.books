@@ -9,6 +9,7 @@ use App\Http\Requests\BookRequest;
 use App\Http\Resources\BookResource;
 use App\Entities\Author;
 use Doctrine\ORM\EntityManagerInterface;
+use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
@@ -18,10 +19,32 @@ class BookController extends Controller
     {
         $this->entityManager = $entityManager;
     }
-    public function index()
+    public function index(Request $request)
     {
-        $books = $this->entityManager->getRepository(Book::class)->findAll();
-        return BookResource::collection($books);
+        $page = $request->input('page', 1);
+        $perPage = $request->input('per_page', 10);
+
+        $totalBooks = $this->entityManager->getRepository(Book::class)->count([]);
+
+        $query = $this->entityManager->getRepository(Book::class)
+            ->createQueryBuilder('b')
+            ->setFirstResult(($page - 1) * $perPage)
+            ->setMaxResults($perPage)
+            ->getQuery();
+
+        $books = $query->getResult();
+
+        $paginatedBooks = [
+            'data' => BookResource::collection($books),
+            'meta' => [
+                'current_page' => $page,
+                'per_page' => $perPage,
+                'total' => $totalBooks,
+                'total_pages' => ceil($totalBooks / $perPage),
+            ]
+        ];
+
+        return response()->json($paginatedBooks);
     }
 
     public function show($id)
