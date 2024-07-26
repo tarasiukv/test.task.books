@@ -1,6 +1,6 @@
 # Test task for Grade
 
-## App: Books
+## App: catalog of Books
 
 - Test task
     * [What's inside](#What's_inside)
@@ -11,7 +11,7 @@
 # What's inside
 
 Contains: 
- - Laravel, Doctrine
+ - Laravel, Vue.js, vite, Doctrine
 
 
 # Installation
