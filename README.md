@@ -3,9 +3,16 @@
 ## App: Books
 
 - Test task
+    * [What's inside](#What's_inside)
     * [Installation](#installation)
     * [Run project](#run_project)
     * [Issues](#issues)
+
+# What's inside
+
+Contains: 
+ - Laravel, Doctrine
+
 
 # Installation
 
